@@ -106,8 +106,8 @@ func run() error {
 		for _ = range ticker.C {
 			netIn := getNetIn()
 			netOut := getNetOut()
-			upText.Set("text", `<font color="green">⇧</font> `+parseSize(netIn-oldNetIn))
-			downText.Set("text", `<font color="red">⇩</font> `+parseSize(netOut-oldNetOut))
+			upText.Set("text", `<font color="green">⇧</font> `+parseSize(netOut-oldNetOut))
+			downText.Set("text", `<font color="red">⇩</font> `+parseSize(netIn-oldNetIn))
 			oldNetIn = netIn
 			oldNetOut = netOut
 		}
