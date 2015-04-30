@@ -38,17 +38,19 @@ ApplicationWindow {
 
         Text {
             id: up
+            objectName: "upText"
             x: 3
             color: "white"
-            text: speed.up
+            text: '<font color="green">⇧</font> 0 B/s'
             font.pixelSize: 13
         }
         Text {
             id: down
+            objectName: "downText"
             x: 3
             y: up.y + font.pixelSize + 3
             color: "white"
-            text: speed.down
+            text: '<font color="red">⇩</font> 0 B/s'
             font.pixelSize: 13
         }
     }

@@ -91,18 +91,10 @@ func run() error {
 		return err
 	}
 
-	speed := Speed{
-		Up:   `<font color="green">⇧</font> `,
-		Down: `<font color="red">⇩</font> `,
-	}
-
-	context := engine.Context()
-	context.SetVar("speed", &speed)
-
 	window := component.CreateWindow(nil)
-
-	speed.Root = window.Root()
-
+	root := window.Root()
+	upText:=root.ObjectByName("upText")
+	downText:=root.ObjectByName("downText")
 	window.Show()
 
 	go func() {
@@ -114,21 +106,14 @@ func run() error {
 		for _ = range ticker.C {
 			netIn := getNetIn()
 			netOut := getNetOut()
-			speed.Up = `<font color="green">⇧</font> ` + parseSize(netIn-oldNetIn)
-			speed.Down = `<font color="red">⇩</font> ` + parseSize(netOut-oldNetOut)
+			upText.Set("text", `<font color="green">⇧</font> ` + parseSize(netIn-oldNetIn))
+			downText.Set("text", `<font color="red">⇩</font> ` + parseSize(netOut-oldNetOut))
 			oldNetIn = netIn
 			oldNetOut = netOut
-			context.SetVar("speed", &speed)
 		}
 	}()
 
 	window.Wait()
 
 	return nil
-}
-
-type Speed struct {
-	Root qml.Object
-	Up   string
-	Down string
 }
