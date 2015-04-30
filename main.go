@@ -93,8 +93,8 @@ func run() error {
 
 	window := component.CreateWindow(nil)
 	root := window.Root()
-	upText:=root.ObjectByName("upText")
-	downText:=root.ObjectByName("downText")
+	upText := root.ObjectByName("upText")
+	downText := root.ObjectByName("downText")
 	window.Show()
 
 	go func() {
@@ -106,8 +106,8 @@ func run() error {
 		for _ = range ticker.C {
 			netIn := getNetIn()
 			netOut := getNetOut()
-			upText.Set("text", `<font color="green">⇧</font> ` + parseSize(netIn-oldNetIn))
-			downText.Set("text", `<font color="red">⇩</font> ` + parseSize(netOut-oldNetOut))
+			upText.Set("text", `<font color="green">⇧</font> `+parseSize(netIn-oldNetIn))
+			downText.Set("text", `<font color="red">⇩</font> `+parseSize(netOut-oldNetOut))
 			oldNetIn = netIn
 			oldNetOut = netOut
 		}
